@@ -41,4 +41,8 @@ def result() :
     ls = recommend(name)
     return render_template("result.html",name = ls)
 
+@app.route('/about')
+def about() :
+    return render_template("about.html")
+
 
