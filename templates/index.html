@@ -45,6 +45,20 @@
 
     <div class="container">
 
+      <div class="row mb-5">
+        <div class="col-sm-2 fs-4">Enter Movie</div>
+        <div class="col-sm-3 ">
+            <form class="mt-2" action="/res" method="POST">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">*Case Sensitive</label>
+                  <input type="text" class="form-control mt-2 mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>  
+    </div>
+
         <div class="row mb-5 ">
             <div class="col-sm-3 ms-2 mt-2">
                 <div class="card border-primary mb-3 text-white" style="height:100%;">
@@ -67,26 +81,10 @@
                     v1.01
                     </div>
                   </div>
-            </div>
-            
+            </div>         
 
         </div>
 
-        <div class="row mt-5">
-            <div class="col-sm-2 fs-4">Enter Movie</div>
-            <div class="col-sm-3 ">
-                <form class="mt-2" action="/res" method="POST">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">*Case Sensitive</label>
-                      <input type="text" class="form-control mt-2 mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-            </div>  
-        </div>
-
-        
     </div>
 
   </body>
