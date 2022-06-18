@@ -15,7 +15,7 @@
     <div class="container">
         <nav class="mt-3 navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-              <a class="navbar-brand fw-bold text-primary" href="#">Reco.IO</a>
+              <a class="navbar-brand fw-bold text-primary" href="/">Reco.IO</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -47,11 +47,11 @@
 
       <div class="row mb-5">
         <div class="col-sm-3 fs-4">Enter A Movie You Like</div>
-        <div class="col-sm-3 ">
+        <div class="col-sm-4 ">
             <form class="mt-2" action="/res" method="POST">
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">*Case and Spell Sensitive</label>
-                  <input type="text" class="form-control mt-2 mb-3 " id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                  <label for="exampleInputEmail1" class="form-label">*Case and Spell Sensitive <span class="text-danger">  {{ name0 }} </span> </label>
+                  <input type="text" placeholder="Jab We Met" class="form-control mt-2 mb-3 " id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>

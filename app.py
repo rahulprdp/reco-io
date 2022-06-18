@@ -47,7 +47,7 @@ def result() :
     name = request.form.get("name")
     ls = recommend(name)
     if len(ls)==1:
-        return render_template("result.html",name0 = ls[0])
+        return render_template("index.html",name0 = ls[0])
     else:
         return render_template("result.html",name0 = ls[0],name1 = ls[1],name2 = ls[2],name3 = ls[3] ,name4 = ls[4])
 
