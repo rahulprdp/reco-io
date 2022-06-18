@@ -12,11 +12,18 @@ with open(filename, 'rb') as f:
     similarity,df,movie_db = pickle.load(f)
 
 def recommend(movie):
+    k=-1
     for i in range(1000):
       if movie_db[i][0].lower()==movie.lower():
         k=i
-
     ls = []
+    ls.append("Incorrect Movie Name")
+    if k==-1:
+        return ls
+
+    ls=[]
+
+    
     index = k
     distances = sorted(list(enumerate(similarity[index])),reverse=True,key = lambda x: x[1])
     for i in range(1,10):
@@ -39,7 +46,10 @@ def index() :
 def result() :
     name = request.form.get("name")
     ls = recommend(name)
-    return render_template("result.html",name = ls)
+    if len(ls)==1:
+        return render_template("result.html",name0 = ls[0])
+    else:
+        return render_template("result.html",name0 = ls[0],name1 = ls[1],name2 = ls[2],name3 = ls[3] ,name4 = ls[4])
 
 @app.route('/about')
 def about() :
