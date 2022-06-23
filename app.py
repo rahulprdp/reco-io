@@ -1,13 +1,13 @@
 
+from email.policy import default
 import pickle
-from unicodedata import name
 from flask import Flask, render_template , request,redirect
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
+import sqlalchemy
 
-
-#A bit of change
 #ML Code 
-
 
 filename = 'finalreco.pkl'
 with open(filename, 'rb') as f:
@@ -37,9 +37,26 @@ def recommend(movie):
 ## End of ML Code
 
 
-
+##Flask App -------------------------------------------------------
 app = Flask(__name__)
-subs = []
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///subs.db'
+
+#Initialise DB
+db=SQLAlchemy(app)
+
+#Creating Models
+
+class sub(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    mail = db.Column(db.String(200), nullable=False)
+    dateCreated = db.Column(db.DateTime, default=datetime.utcnow)
+
+    #Create fun to return string when we add stuff
+    def __repr__(self):
+        return '<name %r>' % self.id
+
+
 
 @app.route('/')
 def index() :
@@ -56,20 +73,34 @@ def result() :
 
 @app.route('/about')
 def about() :
-    return render_template("about.html",cnt=len(subs))
+    return render_template("about.html")
 
 
 
-@app.route('/appends', methods=["POST"])
+@app.route('/appends', methods=['POST','GET'])
 def appends():
-    name = request.form.get("userName")
-    mail = request.form.get("userEmail")
+    fname = request.form.get("userName")
+    fmail = request.form.get("userEmail")
 
-    if not name or not mail :
-        errorStmt = "All Fields are required"
-        return render_template("about.html",errorStmt=errorStmt, name=name, mail=mail)
+    
+    if request.method=="POST":
+        if not fname or not fmail :
+            errorStmt = "All Fields are required"
+            return render_template("about.html",errorStmt=errorStmt, name=fname, mail=fmail)
+
+
+        new_sub = sub(name=fname,mail=fmail)
+        try:
+            db.session.add(new_sub)
+            db.session.commit()
+            return redirect('/appends')
+        except :
+            return "<h1> There Was An Error </h1>"
 
     else :
-
-        subs.append([name,mail])
-        return render_template("about.html",name="", mail="", sucMsg="Successfully Added")
+        subs = sub.query.order_by(sub.dateCreated)
+        n=""
+        for s in subs:
+            n=s.name
+            
+        return render_template("about.html",name="", mail="", sucMsg=n + " Was Scuccessfull Added ! ")
