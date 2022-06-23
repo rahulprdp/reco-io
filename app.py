@@ -104,3 +104,11 @@ def appends():
             n=s.name
             
         return render_template("about.html",name="", mail="", sucMsg=n + " Was Scuccessfull Added ! ")
+
+
+@app.route('/ctrl', methods=['POST','GET'])
+def cntrl():
+    subs = sub.query.order_by(sub.dateCreated)
+    return render_template("ctrl.html",ss=subs)
+
+
