@@ -3,6 +3,8 @@ import pickle
 from unicodedata import name
 from flask import Flask, render_template , request,redirect
 
+
+
 #A bit of change
 #ML Code 
 
@@ -37,6 +39,7 @@ def recommend(movie):
 
 
 app = Flask(__name__)
+subs = []
 
 @app.route('/')
 def index() :
@@ -53,6 +56,20 @@ def result() :
 
 @app.route('/about')
 def about() :
-    return render_template("about.html")
+    return render_template("about.html",cnt=len(subs))
 
 
+
+@app.route('/appends', methods=["POST"])
+def appends():
+    name = request.form.get("userName")
+    mail = request.form.get("userEmail")
+
+    if not name or not mail :
+        errorStmt = "All Fields are required"
+        return render_template("about.html",errorStmt=errorStmt, name=name, mail=mail)
+
+    else :
+
+        subs.append([name,mail])
+        return render_template("about.html",name="", mail="", sucMsg="Successfully Added")

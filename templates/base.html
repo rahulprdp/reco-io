@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Poppins:wght@400;700&family=Roboto+Mono:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <title> {% block title %}Reco.Io{% endblock %}
     </title>
   </head>
-  <body style="background-color:black; color: white; font-family: 'Poppins';">
+  <body>
 
     <div class="container">
         <nav class="mt-3 navbar navbar-expand-lg navbar-dark">
